@@ -215,4 +215,35 @@ less file1
 ```bash
 history | less
 ```
- 
+
+ - Exiting from super user
+ ```bash
+ exit
+ ```
+
+- To understand who logged into the system
+```bash
+users
+```
+
+- To get id of information
+```bash
+id
+```
+
+- To make executable
+```bash
+chmod +x file
+```
+
+- To change the file permission personal
+```bash
+chmod 700 exampleFile
+chmod 644 exampleFile
+```
+
+- make the terminal font larger and smaller
+```bash
+ctrl + shift + +
+ctrl + shift + -
+```
