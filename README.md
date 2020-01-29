@@ -364,4 +364,32 @@ find . -type f -mtime -1 => files that modified less than one day ago
 find . -type f -mtime +1 => files that modified more than one day ago
 find . -size +5M => files that modified more than one day ago
 find . -perm 777 => search based on file permissions
+find ./sample-directory exec chown mohsenshafiei:www-data {} +
+find . -type f -name "*.pyc" -maxdepth 1 -exec rm {} +
+```
+
+- The rsync command will allow you to sync file and directories on your local machine or even over a network between servers.
+
+```bash
+rsync ./original ./backup
+rsync -r ./original ./backup
+rsync -a --dry-run ./original ./backup
+rsync -av --dry-run ./original ./backup
+rsync -zaP ~/web-files username@192.168.1.1:password~/public/ => syncing files between local and remote
+rsync -zaP username@192.168.1.1:password~/public/ ~/backup-directory  => syncing files between local and remote
+```
+
+- cron will allow you to run commands on a repetitive schedule
+
+```bash
+crontab -l => list of all cron jobs
+* * * * * rm -rf ~/backup
+```
+
+- download files from WWW
+```bash
+wget link-address
+wget -O your-name.txt link-address
+wget link-address-1 link-address-2
+wget --help
 ```
