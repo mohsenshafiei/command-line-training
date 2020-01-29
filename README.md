@@ -247,3 +247,121 @@ chmod 644 exampleFile
 ctrl + shift + +
 ctrl + shift + -
 ```
+
+- search on a file
+```bash
+grep "sample text or regex" file.txt
+grep -w "sample text or regex" file.txt
+grep -wi "sample text or regex" file.txt
+grep -win "sample text or regex" file.txt
+grep -win -B 4 "sample text or regex" file.txt
+grep -win -A 4 "sample text or regex" file.txt
+grep -win -C 2 "sample text or regex" file.txt
+```
+
+- Searching on all files in a directory
+```bash
+grep -win "simple text or regex" ./*
+grep -win "simple text or regex" ./*.txt
+grep -winr "simple text or regex" ./ => search recursively a directory
+grep -wirl "simple text or regex" ./ => files of matches
+grep -wirc "simple text or regex" ./ => number of matches
+history | grep "git commit" | grep "dotfile"
+```
+
+- install new version of grep
+```bash
+brew install grep --with-default-names
+```
+
+- Select the data and present in columns and rows
+```bash
+awk '{print $3 $4}' file.txt
+``
+
+- Filtering lines in terminal using sed
+```bash
+cat file.txt | sed -r '2,4d'
+cat file.txt | sed -n -r '2,4p'
+cat file.txt | sed -n -r '/regex/d'
+cat file.txt | sed -r 's/Frank/Mohsen/' => replace the text
+cat file.txt | sed -r 's//Mohsen/' => remove the text
+```
+
+- Which files are open
+```bash
+lsof | head
+```
+
+- Which processes have this file open?
+```bash
+lsof /var/log/nginx-error.log
+```
+
+- Which files does process X have open?
+```bash
+lsof -p 1
+lsof -p `pgrep ABC`
+```
+
+- Where is the binary for this process?
+```bash
+lsof -p ABC | grep bin
+```
+
+- Which shared libraries is this program using? (manually upgrading software, i.e. openssl)
+```bash
+lsof -p PID | grep .so
+```
+- Where is this thing logging to?
+```bash
+lsof -p ABC | grep log
+```
+
+- Which processes still have this old library open?
+```bash
+lsof grep libname.so
+```
+
+- Which files does user XYZ have open?
+```bash
+lsof -u XYZ
+lsof -u XYZ -i
+```
+
+- Which process is listening on Port X (or using Protocol Y)?
+```bash
+lsof -i :80
+lsof -i tcp
+```
+
+- Getting data from server with curl
+
+```bash
+curl https://localhost:5000/products
+curl -i https://localhost:5000/products => more information
+curl -d "first=mohsen&last=shafiei" https://localhost:5000/person
+curl -d X PUT "first=mohsen&last=shafiei" https://localhost:5000/person
+curl -d X DELETE "first=mohsen&last=shafiei" https://localhost:5000/person
+curl -u username:password https://localhost:5000/person
+curl -o  https://localhost:5000/person/image.jpeg
+curl -o file.txt https://localhost:5000/person/file.txt
+```
+note: you can use curl for many other things like test speed and etc.
+
+- The find command allows us to scan through our file system in order to find files and directories that meet a certain criteria
+
+```bash
+find .
+find my-directory
+find my-directory -type -f => returns all files not directories
+find my-directory -type -f -name "test" => returns all files not directories
+find my-directory -type -f -name "test*" => returns all files with name test
+find my-directory -type -f -iname "test*" => returns all files with name test and case sensitive
+find . -type f -mmin -10 => files that modified less than ten minutes ago
+find . -type f -mmin -1 -min +10 => files that modified less than one minute ago or more than 10 minutes ago
+find . -type f -mtime -1 => files that modified less than one day ago
+find . -type f -mtime +1 => files that modified more than one day ago
+find . -size +5M => files that modified more than one day ago
+find . -perm 777 => search based on file permissions
+```
